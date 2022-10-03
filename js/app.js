@@ -22,8 +22,11 @@
  * Define Global Variables
  * 
 */
+const submissionForm = document.getElementById('submission__form');
 const sections = document.querySelectorAll('section');
-document.addEventListener('DOMContentLoaded', PopulateNavBar());
+document.addEventListener('DOMContentLoaded', PopulateNavBar);
+
+submissionForm.addEventListener('submit', displaySubmittedMessage);
 
 /**
  * End Global Variables
@@ -32,17 +35,18 @@ document.addEventListener('DOMContentLoaded', PopulateNavBar());
 */
 function PopulateNavBar() {
     const navBarList = document.getElementById("navbar__list");
-    console.log(navBarList);
     sections.forEach((section) => {
-        console.log(section);
         const navListItem = document.createElement("li");
         navListItem.textContent = section.dataset.nav;
         navBarList.appendChild(navListItem);
     });
 }
 
-
-
+function displaySubmittedMessage (e) {
+    console.log(e);
+    e.preventDefault();
+    alert("Submission Succesfull");
+}
 
 /**
  * End Helper Functions
