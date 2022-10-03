@@ -22,13 +22,25 @@
  * Define Global Variables
  * 
 */
-
+const sections = document.querySelectorAll('section');
+document.addEventListener('DOMContentLoaded', PopulateNavBar());
 
 /**
  * End Global Variables
  * Start Helper Functions
  * 
 */
+function PopulateNavBar() {
+    const navBarList = document.getElementById("navbar__list");
+    console.log(navBarList);
+    sections.forEach((section) => {
+        console.log(section);
+        const navListItem = document.createElement("li");
+        navListItem.textContent = section.dataset.nav;
+        navBarList.appendChild(navListItem);
+    });
+}
+
 
 
 
