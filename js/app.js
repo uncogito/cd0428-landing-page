@@ -24,7 +24,9 @@
 */
 const submissionForm = document.getElementById('submission__form');
 const sections = document.querySelectorAll('section');
+
 document.addEventListener('DOMContentLoaded', PopulateNavBar);
+document.addEventListener('DOMContentLoaded', activateSectionInViewport);
 
 submissionForm.addEventListener('submit', displaySubmittedMessage);
 
@@ -54,6 +56,22 @@ function displaySubmittedMessage (e) {
  * 
 */
 
+function activateSectionInViewport() {
+    window.addEventListener('scroll', () => {
+        const sections = document.querySelectorAll('section');
+
+        function checkIfActive(section) {
+            const sectionLocation = section.getBoundingClientRect();
+            if (sectionLocation.top < window.innerHeight * 0.5 && sectionLocation.bottom > window.innerHeight * 0.5) {
+                section.classList.add("your-active-class");
+            } else {
+                section.classList.remove("your-active-class");
+            }
+        }
+        sections.forEach(checkIfActive);
+    });
+
+}
 // build the nav
 
 
