@@ -1,61 +1,43 @@
-/**
- * 
- * Manipulating the DOM exercise.
- * Exercise programmatically builds navigation,
- * scrolls to anchors from navigation,
- * and highlights section in viewport upon scrolling.
- * 
- * Dependencies: None
- * 
- * JS Version: ES2015/ES6
- * 
- * JS Standard: ESlint
- * 
-*/
-
-/**
- * Comments should be present at the beginning of each procedure and class.
- * Great to have comments before crucial code sections within the procedure.
-*/
-
-/**
- * Define Global Variables
- * 
-*/
 const submissionForm = document.getElementById('submission__form');
 const sections = document.querySelectorAll('section');
+const navBarList = document.getElementById("navbar__list");
 
-document.addEventListener('DOMContentLoaded', PopulateNavBar);
-document.addEventListener('DOMContentLoaded', activateSectionInViewport);
 
-submissionForm.addEventListener('submit', displaySubmittedMessage);
 
-/**
- * End Global Variables
- * Start Helper Functions
- * 
-*/
+
+
+/* create navigation bar*/
 function PopulateNavBar() {
-    const navBarList = document.getElementById("navbar__list");
     sections.forEach((section) => {
         const navListItem = document.createElement("li");
-        navListItem.textContent = section.dataset.nav;
+        const anchor = document.createElement("a");
+        anchor.textContent = section.dataset.nav;
+        navListItem.appendChild(anchor);
         navBarList.appendChild(navListItem);
     });
 }
 
-function displaySubmittedMessage (e) {
+/* scroll to section when nav clicked*/
+function scrollOnClick() {
+    navBarList.addEventListener('click', (e) => {
+        e.preventDefault();
+        sections.forEach(section => {
+            if (section.dataset.nav === e.target.textContent) {
+                section.scrollIntoView({
+                    behavior: "smooth"
+                })
+            }
+        })
+    })
+}
+/* alert when submission of form succesfull*/
+function displaySubmittedMessage(e) {
     console.log(e);
     e.preventDefault();
     alert("Submission Succesfull");
 }
 
-/**
- * End Helper Functions
- * Begin Main Functions
- * 
-*/
-
+/* sets active section according to user scrolling*/
 function activateSectionInViewport() {
     window.addEventListener('scroll', () => {
         const sections = document.querySelectorAll('section');
@@ -72,25 +54,20 @@ function activateSectionInViewport() {
     });
 
 }
-// build the nav
-
-
-// Add class 'active' to section when near top of viewport
-
-
-// Scroll to anchor ID using scrollTO event
 
 
 /**
  * End Main Functions
  * Begin Events
  * 
-*/
+ */
 
 // Build menu 
 
 // Scroll to section on link click
 
 // Set sections as active
-
-
+document.addEventListener('DOMContentLoaded', PopulateNavBar);
+document.addEventListener('DOMContentLoaded', scrollOnClick);
+document.addEventListener('DOMContentLoaded', activateSectionInViewport);
+submissionForm.addEventListener('submit', displaySubmittedMessage);
