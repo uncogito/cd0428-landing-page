@@ -231,3 +231,14 @@ input:not(:placeholder-shown):not(:focus):invalid {
     border: 2px solid red;
     display:block;
   }
+
+/* clicked menu items */
+a.your-active-class {
+    background: grey;
+}
+/* adjusting to narrow screen*/
+@media only screen and (max-width: 600px) {
+    .navbar__menu {
+        font-size: 1vh;
+    }
+}
